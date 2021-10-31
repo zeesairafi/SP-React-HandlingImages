@@ -2,12 +2,15 @@
   text-align: center;
 }
 
-.books {
-  background-color: yellow;
+.title {
+  text-align: center;
 }
 
-.countries {
-  background-color: blue;
+.search-bar {
+  padding: 0.5rem;
+  margin: 1rem auto;
+  display: block;
+  width: 40%;
 }
 
 .App-logo {

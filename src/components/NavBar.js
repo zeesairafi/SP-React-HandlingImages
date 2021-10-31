@@ -6,17 +6,14 @@ function NavBar() {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Link to="/">
-          <Navbar.Brand>Navbar</Navbar.Brand>
+        <Link to="/products">
+          <Navbar.Brand>Chicken Shop</Navbar.Brand>
         </Link>
-        <Nav className="me-auto">
+        {/* <Nav className="me-auto">
           <Nav.Link>
-            <Link to="/countries">Countries</Link>
+            <Link to="/products">Products</Link>
           </Nav.Link>
-          <Nav.Link>
-            <Link to="/counter">Counter</Link>
-          </Nav.Link>
-        </Nav>
+        </Nav> */}
       </Container>
     </Navbar>
   );

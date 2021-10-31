@@ -1,31 +1,31 @@
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
-import countryStore from "../stores/countryStore";
+import productStore from "../stores/productStore";
 
-function CountryModalUpdate(props) {
+function ProductModalUpdate({ oldProduct }) {
   const [show, setShow] = useState(false);
-  const [country, setCountry] = useState({
-    name: props.oldCountry.name,
-    image: props.oldCountry.image,
+  const [product, setProduct] = useState({
+    name: oldProduct.name,
+    image: oldProduct.image,
   });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleChange = (event) =>
-    setCountry({ ...country, [event.target.name]: event.target.value });
+    setProduct({ ...product, [event.target.name]: event.target.value });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    countryStore.updateCountry(country, props.oldCountry.id);
-    console.log(country);
+    productStore.updateProduct(product, oldProduct._id);
+    console.log(product);
     handleClose();
   };
 
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Edit Country
+        Edit Product
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -33,13 +33,13 @@ function CountryModalUpdate(props) {
           <form onSubmit={handleSubmit}>
             <input
               name="name"
-              value={country.name}
+              value={product.name}
               onChange={(e) => handleChange(e)}
-              placeholder="Country Name"
+              placeholder="Product Name"
             />
             <input
               name="image"
-              value={country.image}
+              value={product.image}
               onChange={handleChange}
               placeholder="Image"
             />
@@ -51,4 +51,4 @@ function CountryModalUpdate(props) {
   );
 }
 
-export default CountryModalUpdate;
+export default ProductModalUpdate;
