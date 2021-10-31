@@ -1,7 +1,13 @@
 import "./App.css";
 import { useState } from "react";
-
+import { observer } from "mobx-react";
+import countryStore from "./stores/countryStore";
 import List from "./components/List";
+import Home from "./components/Home";
+import Counter from "./components/Counter";
+import { Route, Switch } from "react-router";
+import NavBar from "./components/NavBar";
+import CountryDetail from "./components/CountryDetail";
 
 // CRUD => Create / Retrieve / Update / Delete
 
@@ -11,33 +17,6 @@ import List from "./components/List";
 // forms => Create + Update
 // routers => Detail
 // axios
-
-const countries = [
-  {
-    // key: "value",
-    id: 1,
-    name: "US",
-    image:
-      "https://cdn.britannica.com/33/4833-050-F6E415FE/Flag-United-States-of-America.jpg",
-  },
-  {
-    id: 2,
-    name: "Switzerland",
-    image:
-      "https://www.nolato.com/-/media/Images/Career/Switzerland/Switzerland?h=81.png0&w=1650&hash=BF0D45F7DF677E5A785236B388E02898",
-  },
-  {
-    id: 3,
-    name: "Italy",
-    image:
-      "https://www.atlanticcouncil.org/wp-content/uploads/2020/09/Rome-coroavirus-large.jpg",
-  },
-  {
-    id: 4,
-    name: "Russia",
-    image: "image",
-  },
-];
 
 const books = [
   {
@@ -60,32 +39,29 @@ const books = [
 ];
 
 function App() {
-  const [counterState, setCounterState] = useState(0);
-  const title = "Hello Ghada and Ali!";
-  let counterVariable = counterState * 5;
-  // counterVariable++
-  // counterVariable = counterVariable + 1
-  const increment = () => {
-    // counterVariable++;
-    setCounterState(counterState + 1);
-    console.log(counterVariable);
-  };
-  const decrement = () => {
-    // counterVariable--;
-    setCounterState(counterState - 1);
-    console.log(counterVariable);
-  };
   return (
     <div>
-      <h1>{title}</h1>
-      <button onClick={increment}>PLUS</button>
-      <h3>Variable: {counterVariable}</h3>
-      <h3>State: {counterState}</h3>
-      <button onClick={decrement}>MINUS</button>
-      <List data={books} title="Books" backgroundColor="books" />
-      <List data={countries} title="Countries" backgroundColor="countries" />
+      <NavBar />
+      <Switch>
+        <Route path="/counter">
+          <Counter />
+        </Route>
+        <Route path="/countries/:countrySlug">
+          <CountryDetail />
+        </Route>
+        <Route path="/countries">
+          <List
+            data={countryStore.countries}
+            title="Countries"
+            backgroundColor="countries"
+          />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
 
-export default App;
+export default observer(App);
