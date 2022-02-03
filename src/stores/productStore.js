@@ -10,7 +10,9 @@ class ProductStore {
 
   createProduct = async (newProduct) => {
     try {
-      const response = await instance.post("/products", newProduct);
+      const formData = new formData()
+      for(const key in newProduct) formData.append(key, newProduct[key])
+      const response = await instance.post("/products", formData);
       this.products.push(response.data);
     } catch (error) {
       console.log(
